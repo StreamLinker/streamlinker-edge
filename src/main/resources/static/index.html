@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamLinker Edge Dashboard</title>
+    <link rel="stylesheet" href="/admin/app.css">
+</head>
+<body>
+<div class="shell shell-narrow">
+    <header class="hero hero-compact">
+        <div>
+            <p class="eyebrow">StreamLinker Edge</p>
+            <h1>Control Dashboard</h1>
+            <p class="hero-copy">A lightweight local console for stream intake, push targets, and runtime checks.</p>
+        </div>
+        <div class="hero-actions">
+            <button id="refresh-dashboard" class="button button-primary">Refresh</button>
+            <span id="status-badge" class="status-badge">Idle</span>
+        </div>
+    </header>
+
+    <nav class="top-nav">
+        <a class="nav-link is-active" href="/">Dashboard</a>
+        <a class="nav-link" href="/pulls.html">Pull Streams</a>
+        <a class="nav-link" href="/pushes.html">Push Targets</a>
+    </nav>
+
+    <main class="dashboard-grid">
+        <section class="panel stats-panel">
+            <div class="panel-header">
+                <div>
+                    <p class="panel-kicker">Overview</p>
+                    <h2>Quick health view</h2>
+                </div>
+            </div>
+            <div id="stats-grid" class="stats-grid"></div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <p class="panel-kicker">Pull Runtime</p>
+                    <h2>Latest local streams</h2>
+                </div>
+                <a class="button" href="/pulls.html">Open page</a>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Stream</th>
+                        <th>Expected</th>
+                        <th>Runtime</th>
+                        <th>Error</th>
+                    </tr>
+                    </thead>
+                    <tbody id="dashboard-streams-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <p class="panel-kicker">Push Runtime</p>
+                    <h2>Latest push targets</h2>
+                </div>
+                <a class="button" href="/pushes.html">Open page</a>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Target</th>
+                        <th>Protocol</th>
+                        <th>Expected</th>
+                        <th>Runtime</th>
+                    </tr>
+                    </thead>
+                    <tbody id="dashboard-pushes-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+<script src="/admin/dashboard.js"></script>
+</body>
+</html>

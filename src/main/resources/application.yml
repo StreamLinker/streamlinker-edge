@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: streamlinker-edge
+  datasource:
+    url: jdbc:mysql://10.12.6.114:3306/streamlinker_edge?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: K8#m@xQvL2!pN9chcnav
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+streamlinker:
+  zlm:
+    api-url: http://localhost:8000
+    secret: 123456
+    vhost: __defaultVhost__
+  edge:
+    media:
+      simulation-enabled: false
+    process:
+      poll-interval-ms: 1000
+      max-retry-count: 10
+      retry-sleep-ms: 5000
+    reconcile:
+      pull-interval-ms: 5000
+      push-interval-ms: 5000
+      runtime-sync-interval-ms: 3000
+      startup-recover-enabled: true
+      pull-reconcile-enabled: true
+      push-reconcile-enabled: true
+      runtime-sync-enabled: true

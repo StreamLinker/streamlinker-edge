@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamLinker Edge Push Targets</title>
+    <link rel="stylesheet" href="/admin/app.css">
+</head>
+<body>
+<div class="shell">
+    <header class="hero hero-compact">
+        <div>
+            <p class="eyebrow">StreamLinker Edge</p>
+            <h1>Push Targets</h1>
+            <p class="hero-copy">Manage RTMP push destinations and their current runtime status.</p>
+        </div>
+        <div class="hero-actions">
+            <button id="refresh-pushes" class="button button-primary">Refresh</button>
+            <button id="open-push-modal" class="button">New target</button>
+        </div>
+    </header>
+
+    <nav class="top-nav">
+        <a class="nav-link" href="/">Dashboard</a>
+        <a class="nav-link" href="/pulls.html">Pull Streams</a>
+        <a class="nav-link is-active" href="/pushes.html">Push Targets</a>
+    </nav>
+
+    <main>
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <p class="panel-kicker">Manage Targets</p>
+                    <h2>Push definitions and runtime</h2>
+                </div>
+                <span id="push-page-status" class="status-badge">Idle</span>
+            </div>
+            <div class="toolbar">
+                <label class="filter-inline">
+                    <span>Stream</span>
+                    <select id="push-stream-filter"><option value="">All streams</option></select>
+                </label>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Target code</th>
+                        <th>Stream</th>
+                        <th>Protocol</th>
+                        <th>Expected</th>
+                        <th>Runtime</th>
+                        <th>Error</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="push-targets-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+
+<div id="push-modal" class="modal hidden">
+    <div class="modal-backdrop" data-close-push-modal="true"></div>
+    <div class="modal-card">
+        <div class="panel-header">
+            <div>
+                <p class="panel-kicker">Push target editor</p>
+                <h2 id="push-modal-title">New push target</h2>
+            </div>
+            <button class="button" data-close-push-modal="true">Close</button>
+        </div>
+        <form id="push-form" class="form-grid compact-form">
+            <input type="hidden" id="push-edit-code">
+            <label><span>Stream</span><select id="push-stream-id" required></select></label>
+            <label><span>Target code</span><input id="push-target-code" required></label>
+            <label><span>Name</span><input id="push-target-name" required></label>
+            <label><span>Type</span><input id="push-target-type" value="CLOUD_ZLM" required></label>
+            <label><span>Protocol</span><select id="push-target-protocol"><option value="RTMP">RTMP</option></select></label>
+            <label class="span-2"><span>Target URL</span><input id="push-target-url" placeholder="rtmp://..." required></label>
+            <label><span>Target app</span><input id="push-target-app"></label>
+            <label><span>Target stream</span><input id="push-target-stream"></label>
+            <label><span>Enabled</span><select id="push-target-enabled"><option value="1">Enabled</option><option value="0">Disabled</option></select></label>
+            <label><span>Expected state</span><select id="push-target-expected-state"><option value="STOPPED">STOPPED</option><option value="RUNNING">RUNNING</option></select></label>
+            <label class="span-2"><span>Remark</span><textarea id="push-target-remark" rows="3"></textarea></label>
+            <div class="form-actions span-2">
+                <button type="submit" class="button button-primary">Save</button>
+                <button type="button" id="reset-push-form" class="button">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/admin/pushes.js"></script>
+</body>
+</html>

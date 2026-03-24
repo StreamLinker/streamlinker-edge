@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/streamlinker_edge?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: change-me
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+streamlinker:
+  zlm:
+    api-url: http://127.0.0.1:8000
+    secret: 123456
+    vhost: __defaultVhost__
+  edge:
+    media:
+      simulation-enabled: false
+    process:
+      poll-interval-ms: 1000
+      max-retry-count: 10
+      retry-sleep-ms: 5000
+    reconcile:
+      pull-interval-ms: 5000
+      push-interval-ms: 5000
+      runtime-sync-interval-ms: 3000
+      startup-recover-enabled: true
+      pull-reconcile-enabled: true
+      push-reconcile-enabled: true
+      runtime-sync-enabled: true

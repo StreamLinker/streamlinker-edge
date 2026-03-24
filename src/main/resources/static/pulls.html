@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamLinker Edge Pull Streams</title>
+    <link rel="stylesheet" href="/admin/app.css">
+</head>
+<body>
+<div class="shell">
+    <header class="hero hero-compact">
+        <div>
+            <p class="eyebrow">StreamLinker Edge</p>
+            <h1>Pull Streams</h1>
+            <p class="hero-copy">Create, edit, start, and stop local pull streams.</p>
+        </div>
+        <div class="hero-actions">
+            <button id="refresh-pulls" class="button button-primary">Refresh</button>
+            <button id="open-stream-modal" class="button">New stream</button>
+        </div>
+    </header>
+
+    <nav class="top-nav">
+        <a class="nav-link" href="/">Dashboard</a>
+        <a class="nav-link is-active" href="/pulls.html">Pull Streams</a>
+        <a class="nav-link" href="/pushes.html">Push Targets</a>
+    </nav>
+
+    <main>
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <p class="panel-kicker">Manage Streams</p>
+                    <h2>Pull definitions and runtime</h2>
+                </div>
+                <span id="pull-page-status" class="status-badge">Idle</span>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Stream code</th>
+                        <th>Name</th>
+                        <th>Access mode</th>
+                        <th>Expected</th>
+                        <th>Runtime</th>
+                        <th>Error</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="pull-streams-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+
+<div id="stream-modal" class="modal hidden">
+    <div class="modal-backdrop" data-close-stream-modal="true"></div>
+    <div class="modal-card">
+        <div class="panel-header">
+            <div>
+                <p class="panel-kicker">Stream editor</p>
+                <h2 id="stream-modal-title">New stream</h2>
+            </div>
+            <button class="button" data-close-stream-modal="true">Close</button>
+        </div>
+        <form id="stream-form" class="form-grid compact-form">
+            <input type="hidden" id="stream-edit-code">
+            <label><span>Stream code</span><input id="stream-code" required></label>
+            <label><span>Name</span><input id="stream-name" required></label>
+            <label class="span-2"><span>Source URL</span><input id="stream-source-url" placeholder="rtsp://..." required></label>
+            <label><span>Source protocol</span><input id="stream-source-protocol" value="RTSP" required></label>
+            <label><span>Access mode</span><select id="stream-access-mode"><option value="FFMPEG">FFMPEG</option><option value="PROXY">PROXY</option></select></label>
+            <label><span>Local app</span><input id="stream-local-app" value="live" required></label>
+            <label><span>Local stream</span><input id="stream-local-stream" required></label>
+            <label><span>Enabled</span><select id="stream-enabled"><option value="1">Enabled</option><option value="0">Disabled</option></select></label>
+            <label><span>Expected state</span><select id="stream-expected-state"><option value="STOPPED">STOPPED</option><option value="RUNNING">RUNNING</option></select></label>
+            <label class="span-2"><span>Remark</span><textarea id="stream-remark" rows="3"></textarea></label>
+            <div class="form-actions span-2">
+                <button type="submit" class="button button-primary">Save</button>
+                <button type="button" id="reset-stream-form" class="button">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/admin/pulls.js"></script>
+</body>
+</html>
