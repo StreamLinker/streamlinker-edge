@@ -1,5 +1,7 @@
 # StreamLinker Edge
 
+English | [简体中文](README.zh-CN.md)
+
 Edge-side streaming application for StreamLinker.
 
 `streamlinker-edge` runs on the edge node and is responsible for:
