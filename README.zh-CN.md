@@ -66,22 +66,39 @@ StreamLinker Cloud
 - 流和推流目标的本地管理 API
 - 内置静态管理页面
 
-## 仓库结构
+## 快速开始
 
-```text
-streamlinker-edge/
-|- src/main/java/io/streamlinker/edge
-|  |- domain
-|  |- infra/db
-|  |- service
-|  |- service/process
-|  |- service/task
-|  `- web
-|- src/main/resources
-|  |- sql
-|  `- static
-`- src/test
+### 环境要求
+
+- JDK 17+
+- MySQL 8+
+- 本地或可访问的 ZLMediaKit
+- 当前主要面向 Windows 边缘主机部署
+
+### 源码启动
+
+```bash
+git clone https://github.com/StreamLinker/streamlinker-edge.git
+cd streamlinker-edge
+mvn test
+mvn spring-boot:run
 ```
+
+主配置文件：
+- `src/main/resources/application.yml`
+
+本地 ZLM 示例配置：
+- `src/main/resources/application-local-zlm.example.yml`
+
+数据库初始化脚本：
+- `src/main/resources/sql/streamlinker-edge-schema.sql`
+
+### 计划中的交付形态
+
+下面这些交付方式属于项目目标形态的一部分，但在当前开源快照中还没有完全提供：
+- 可直接部署的 release 安装包
+- 容器化部署资源
+- 更完整的运维安装指南
 
 ## 内置页面
 
@@ -104,40 +121,35 @@ streamlinker-edge/
 - `POST /api/local/push-targets/{targetCode}/start`
 - `POST /api/local/push-targets/{targetCode}/stop`
 
-## 配置
+## 仓库结构
 
-主配置文件：
-- `src/main/resources/application.yml`
+```text
+streamlinker-edge/
+|- src/main/java/io/streamlinker/edge
+|  |- domain
+|  |- infra/db
+|  |- service
+|  |- service/process
+|  |- service/task
+|  `- web
+|- src/main/resources
+|  |- sql
+|  `- static
+`- src/test
+```
 
-本地 ZLM 示例配置：
-- `src/main/resources/application-local-zlm.example.yml`
+## 与 Cloud 的关系
 
-数据库初始化脚本：
-- `src/main/resources/sql/streamlinker-edge-schema.sql`
+这个仓库会和 StreamLinker 云端服务协同工作。
+
+角色分工：
+- `streamlinker-edge`：负责现场侧接入、编排与推流
+- `streamlinker-cloud`：负责中心侧接收、管理与播放
 
 ## 依赖仓库
 
 当前项目依赖共享 SDK：
 - [streamlinker-zlm-sdk](https://github.com/StreamLinker/streamlinker-zlm-sdk)
-
-## 本地开发
-
-前置要求：
-- JDK 17+
-- MySQL 8+
-- 本地或可访问的 ZLMediaKit
-
-运行测试：
-
-```bash
-mvn test
-```
-
-启动应用：
-
-```bash
-mvn spring-boot:run
-```
 
 ## 后续计划
 

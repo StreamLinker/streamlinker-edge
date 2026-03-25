@@ -66,22 +66,39 @@ Already implemented in this repository:
 - local admin APIs for stream and push-target CRUD
 - built-in static admin pages
 
-## Repository layout
+## Quick start
 
-```text
-streamlinker-edge/
-|- src/main/java/io/streamlinker/edge
-|  |- domain
-|  |- infra/db
-|  |- service
-|  |- service/process
-|  |- service/task
-|  `- web
-|- src/main/resources
-|  |- sql
-|  `- static
-`- src/test
+### Environment requirements
+
+- JDK 17+
+- MySQL 8+
+- local or reachable ZLMediaKit
+- Windows edge host is the primary target for deployment
+
+### Source run
+
+```bash
+git clone https://github.com/StreamLinker/streamlinker-edge.git
+cd streamlinker-edge
+mvn test
+mvn spring-boot:run
 ```
+
+Main configuration file:
+- `src/main/resources/application.yml`
+
+Example local ZLM configuration:
+- `src/main/resources/application-local-zlm.example.yml`
+
+Database schema:
+- `src/main/resources/sql/streamlinker-edge-schema.sql`
+
+### Planned packaging modes
+
+The following delivery modes are part of the target product shape, but are not fully packaged in the current open-source snapshot yet:
+- release package for direct deployment
+- containerized deployment assets
+- richer operator installation guides
 
 ## Built-in web pages
 
@@ -104,45 +121,40 @@ Local runtime APIs:
 - `POST /api/local/push-targets/{targetCode}/start`
 - `POST /api/local/push-targets/{targetCode}/stop`
 
-## Configuration
+## Repository layout
 
-Main configuration file:
-- `src/main/resources/application.yml`
+```text
+streamlinker-edge/
+|- src/main/java/io/streamlinker/edge
+|  |- domain
+|  |- infra/db
+|  |- service
+|  |- service/process
+|  |- service/task
+|  `- web
+|- src/main/resources
+|  |- sql
+|  `- static
+`- src/test
+```
 
-Example local ZLM configuration:
-- `src/main/resources/application-local-zlm.example.yml`
+## Working with Cloud
 
-Database schema:
-- `src/main/resources/sql/streamlinker-edge-schema.sql`
+This repository is designed to work together with the StreamLinker cloud side.
+
+Role split:
+- `streamlinker-edge`: on-site intake, orchestration, and push
+- `streamlinker-cloud`: centralized receiving, management, and playback
 
 ## Dependency
 
 This project depends on the shared SDK repository:
 - [streamlinker-zlm-sdk](https://github.com/StreamLinker/streamlinker-zlm-sdk)
 
-## Local development
-
-Prerequisites:
-- JDK 17+
-- MySQL 8+
-- local or reachable ZLMediaKit
-
-Run tests:
-
-```bash
-mvn test
-```
-
-Run application:
-
-```bash
-mvn spring-boot:run
-```
-
 ## Roadmap
 
 Planned next steps:
-- improve operator documentation
+- improve operator and deployment documentation
 - add stream process diagnostics to the web console
 - build `streamlinker-cloud`
 - publish `streamlinker-zlm-sdk` artifacts and versioning strategy
