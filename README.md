@@ -4,14 +4,52 @@ English | [简体中文](README.zh-CN.md)
 
 Edge-side streaming application for StreamLinker.
 
-`streamlinker-edge` runs on the edge node and is responsible for:
-- managing pull stream definitions
-- starting and stopping local pull pipelines
-- managing RTMP push targets
-- recovering runtime state after application restart or local ZLMediaKit restart
-- exposing local admin APIs and a built-in lightweight web console
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![ZLMediaKit](https://img.shields.io/badge/ZLMediaKit-integrated-orange.svg)](https://github.com/ZLMediaKit/ZLMediaKit)
+[![Platform](https://img.shields.io/badge/platform-Windows-0078D6.svg)](https://www.microsoft.com/windows)
 
-## Current status
+## Product positioning
+
+StreamLinker Edge is the edge-side component of the StreamLinker platform.
+It is designed to run on field PCs or industrial Windows hosts and connect local video sources with the cloud side.
+
+Typical pipeline:
+
+```text
+Camera / Drone / Local encoder
+        -> RTSP / RTMP / custom access
+StreamLinker Edge
+        -> local pull / process / push / recover
+StreamLinker Cloud
+```
+
+## Typical scenarios
+
+| Scenario | Description |
+| --- | --- |
+| Security monitoring | Collect and forward camera feeds from field sites |
+| Drone video backhaul | Forward live video from drone-side devices |
+| Inspection and construction | Unify multiple on-site video sources to the cloud |
+| Streaming gateway | Use Edge as a local intake and relay node |
+
+## Open-source scope
+
+Current open-source direction includes:
+- multi-stream pull and relay
+- local orchestration and recovery
+- RTMP push target management
+- local admin APIs and lightweight console
+- edge-to-cloud integration through StreamLinker services
+
+Commercial or later-stage capabilities may include:
+- private drone protocol integration
+- GB28181 support
+- advanced multi-node scheduling
+- local recording and buffered retry
+- enterprise support and SLA
+
+## Current implementation status
 
 The repository already contains a working enterprise-style skeleton based on:
 - Spring Boot 3
@@ -19,7 +57,7 @@ The repository already contains a working enterprise-style skeleton based on:
 - MySQL
 - ZLMediaKit HTTP API integration
 
-Current capabilities:
+Already implemented in this repository:
 - persistent stream definitions, push targets, runtime state, and process state
 - pull modes: `FFMPEG` and `PROXY`
 - push mode: `RTMP`
@@ -104,7 +142,7 @@ mvn spring-boot:run
 ## Roadmap
 
 Planned next steps:
-- improve README and operator documentation
+- improve operator documentation
 - add stream process diagnostics to the web console
 - build `streamlinker-cloud`
 - publish `streamlinker-zlm-sdk` artifacts and versioning strategy

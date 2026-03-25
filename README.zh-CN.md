@@ -2,22 +2,62 @@
 
 [English](README.md) | 简体中文
 
-`streamlinker-edge` 是 StreamLinker 的边缘侧应用，运行在边缘节点上，负责：
-- 管理拉流定义
-- 启动和停止本地拉流链路
-- 管理 RTMP 推流目标
-- 在应用重启或本地 ZLMediaKit 重启后恢复运行状态
-- 提供本地管理 API 和内置轻量 Web 控制台
+StreamLinker Edge 是 StreamLinker 平台的边缘侧组件，面向现场 PC、工业 Windows 主机和边缘节点部署。
+它的目标是把本地视频源和云端服务连接起来，承担拉流、转推、恢复与管理能力。
 
-## 当前状态
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![ZLMediaKit](https://img.shields.io/badge/ZLMediaKit-integrated-orange.svg)](https://github.com/ZLMediaKit/ZLMediaKit)
+[![Platform](https://img.shields.io/badge/platform-Windows-0078D6.svg)](https://www.microsoft.com/windows)
 
-当前仓库已经具备一个企业级骨架，技术栈包括：
+## 项目定位
+
+StreamLinker Edge 用于部署在现场侧，负责把摄像头、无人机、编码器等本地视频源接入到 StreamLinker 体系中。
+
+典型链路如下：
+
+```text
+摄像头 / 无人机 / 本地编码器
+        -> RTSP / RTMP / 自定义接入
+StreamLinker Edge
+        -> 本地拉流 / 转推 / 恢复 / 管理
+StreamLinker Cloud
+```
+
+## 适用场景
+
+| 场景 | 说明 |
+| --- | --- |
+| 安防监控 | 现场摄像头统一接入并转发到云端平台 |
+| 无人机图传 | 无人机视频链路的接入与转发 |
+| 巡检和工地 | 多点位现场视频统一采集上云 |
+| 流媒体网关 | 作为本地视频接入和转推节点 |
+
+## 开源版范围
+
+当前开源方向包括：
+- 多路拉流和转推能力
+- 本地流程编排与恢复
+- RTMP 推流目标管理
+- 本地管理 API 和轻量控制台
+- 与 StreamLinker 云端服务的协同
+
+商业版或后续阶段能力可能包括：
+- 无人机私有协议集成
+- GB28181 支持
+- 更复杂的多节点调度
+- 本地录像和缓冲补偿
+- 企业级支持与 SLA
+
+## 当前实现状态
+
+这个仓库当前已经具备企业级骨架，基于以下技术栈：
 - Spring Boot 3
 - MyBatis-Plus
 - MySQL
 - ZLMediaKit HTTP API 集成
 
-当前能力包括：
+当前已经实现的能力：
 - 持久化保存流定义、推流目标、运行态和流程态
 - 拉流模式：`FFMPEG` 和 `PROXY`
 - 推流模式：`RTMP`
@@ -102,7 +142,7 @@ mvn spring-boot:run
 ## 后续计划
 
 下一步建议包括：
-- 持续完善 README 和运维文档
+- 完善运维和部署文档
 - 在控制台中增加流程诊断信息
 - 开始构建 `streamlinker-cloud`
 - 明确 `streamlinker-zlm-sdk` 的发布与版本策略
